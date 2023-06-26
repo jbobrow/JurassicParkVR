@@ -28,6 +28,9 @@ const cylinderEdges = 12;
 const minKink = 0.05;
 const maxKink = 0.1;
 
+const group = new THREE.Group();
+scene.add(group);
+
 // Create cylinders and position them in a double helix
 const cylinders = [];
 for (let i = 0; i < numCylinders; i++) {
@@ -51,7 +54,7 @@ for (let i = 0; i < numCylinders; i++) {
     cylinder1.material = new THREE.MeshStandardMaterial({
         color: color1
     });
-    scene.add(cylinder1);
+    group.add(cylinder1);
     cylinders.push(cylinder1);
 
     const cylinder2 = new THREE.Mesh(cylinderGeometry);
@@ -60,7 +63,7 @@ for (let i = 0; i < numCylinders; i++) {
     cylinder2.material = new THREE.MeshStandardMaterial({
         color: color2
     });
-    scene.add(cylinder2);
+    group.add(cylinder2);
     cylinders.push(cylinder2);
 
     // Compute rotation to align cylinders with the z-axis
@@ -73,7 +76,8 @@ for (let i = 0; i < numCylinders; i++) {
 }
 
 // Create the double helix geometry
-const numSegments = 30 * numCylinders; // Number of segments in each ribbon
+const numSegPerCyl = 30;
+const numSegments = numSegPerCyl * numCylinders; // Number of segments in each ribbon
 const helixLength = spacing * numCylinders;
 const ribbonThickness = 0.1; // Thickness of the ribbon
 const ribbonWidth = 2; // Width of the ribbon
@@ -107,7 +111,7 @@ function createExtrudePath() {
     const points = [];
     // const normals = []; // Store the normals for each segment
 
-    for (let i = 0; i <= numSegments; i++) {
+    for (let i = -numSegPerCyl; i <= numSegments; i++) {
         const t = (i / numSegments) * Math.PI * numRotations;
 
         const x = 2 * helixRadius * Math.cos(t);
@@ -153,8 +157,8 @@ const Material2 = new THREE.MeshStandardMaterial({
 const Ribbon1 = new THREE.Mesh(helixGeometry, Material1);
 const Ribbon2 = new THREE.Mesh(helixGeometry, Material2);
 
-scene.add(Ribbon1);
-scene.add(Ribbon2);
+group.add(Ribbon1);
+group.add(Ribbon2);
 
 // show the normals
 // const vnh = new VertexNormalsHelper( Ribbon1, 0.5 );
@@ -163,6 +167,15 @@ scene.add(Ribbon2);
 // Rotate the ribbons
 Ribbon1.rotation.z = 0;
 Ribbon2.rotation.z = Math.PI;
+
+// Rotate the group
+group.rotation.x = Math.PI/3;
+group.rotation.y =3*Math.PI/4;
+group.rotation.z = Math.PI/4;
+// Position the group
+camera.position.x = 10;
+camera.position.y = 10;
+camera.position.z = 0;
 
 // Create a directional light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
