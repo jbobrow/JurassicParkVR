@@ -15,16 +15,18 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 // Parameters for the double helix
-const radius = 1;
+const radius = 0.8;
 const height = 6;
-const spacing = 4;
-const twist = 0.3;
-const numCylinders = 10;
-const cylinderColors = ['#3B4C8D', '#A5BF8E', '#B3A682', '#64B3C9']; // Randomized colors
+const spacing = 2.5;
+const twist = 0.2;
+const numCylinders = 16;
+const cylinderColors = ['#5577BB', '#99BB88', '#CCAA77', '#66CCEE']; // Randomized colors
 const helixRadius = height / 2;
 const helixHeight = numCylinders * spacing;
 const numRotations = twist * numCylinders;
 const cylinderEdges = 12;
+const minKink = 0.05;
+const maxKink = 0.1;
 
 // Create cylinders and position them in a double helix
 const cylinders = [];
@@ -66,8 +68,8 @@ for (let i = 0; i < numCylinders; i++) {
     const rotationAngle2 = Math.atan2(y2, x2) + Math.PI / 2;
 
     // Apply rotation to the cylinders
-    cylinder1.rotation.z = rotationAngle1 + Math.random() / 10;
-    cylinder2.rotation.z = rotationAngle2;
+    cylinder1.rotation.z = rotationAngle1 + getRandomArbitrary(minKink, maxKink);
+    cylinder2.rotation.z = rotationAngle2 - getRandomArbitrary(minKink, maxKink);
 }
 
 // Create the double helix geometry
@@ -138,14 +140,14 @@ function createExtrudePath() {
 }
 
 const Material1 = new THREE.MeshStandardMaterial({
-    color: 0xA5BF8E,
+    color: 0xAACC88,
     side: THREE.DoubleSide,
-    wireframe: true
+    wireframe: false
 });
 const Material2 = new THREE.MeshStandardMaterial({
-    color: 0x69A08B,
+    color: 0x66AA88,
     side: THREE.DoubleSide,
-    wireframe: true
+    wireframe: false
 });
 
 const Ribbon1 = new THREE.Mesh(helixGeometry, Material1);
@@ -175,7 +177,7 @@ scene.add(ambientLight);
 camera.position.z = 30;
 
 // Set the background color
-renderer.setClearColor(0x295059);
+renderer.setClearColor(0x225566);
 
 // Animation loop
 function animate() {
@@ -185,3 +187,7 @@ function animate() {
 }
 
 animate();
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
