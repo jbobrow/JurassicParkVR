@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from '/node_modules/three';
 import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js'
 import { VertexNormalsHelper } from '/node_modules/three/examples/jsm/helpers/VertexNormalsHelper.js';
 
