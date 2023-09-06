@@ -1,7 +1,7 @@
 # JurassicParkVR
 In 1993, Jurassic Park demoed the future, including a Virtual Reality DNA Explorer. Now that DNA Explorer is a reality.
-
 🧬
+<img src="https://github.com/jbobrow/JurassicParkVR/blob/main/assets/JurassicPark_Screenshot.png" alt="Screenshot of Jurassic Park in Three.js" width="300"/>
 
 ## Instructions
 To run the DNA viewer locally, you will need to do the following:
@@ -9,6 +9,15 @@ To run the DNA viewer locally, you will need to do the following:
 2. open terminal (or your CLI of choice) and `cd` to this folder
 3. type `npm install` – this will install the javascript dependencies
 4. type `npx vite` – this will locally serve our DNA Explorer
+
+## Features
+- [x] DNA Strand model
+- [x] Drag to view around
+
+## Todo
+- [ ] Fix helical rail to remain normal to the rotational axis of the helix 
+- [ ] Enable VR Headset
+- [ ] Use OpenCV for hand manipulation 
 
 ## Why this?
 Why not?
