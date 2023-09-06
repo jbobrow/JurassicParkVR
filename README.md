@@ -1,6 +1,7 @@
 # JurassicParkVR
 In 1993, Jurassic Park demoed the future, including a Virtual Reality DNA Explorer. Now that DNA Explorer is a reality.
 🧬
+
 <img src="https://github.com/jbobrow/JurassicParkVR/blob/main/assets/JurassicPark_Screenshot.png" alt="Screenshot of Jurassic Park in Three.js" width="300"/>
 
 ## Instructions
